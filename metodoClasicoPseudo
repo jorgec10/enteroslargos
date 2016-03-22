@@ -49,7 +49,7 @@ Suma (EnteroLargo a, EnteroLargo b) : EnteroLargo r
 
 
                         12345 a
-                      *    55 b
+                      *    55 
                         -----
                         61725
                      + 61725
@@ -64,4 +64,6 @@ Suma (EnteroLargo a, EnteroLargo b) : EnteroLargo r
 
 
 299999997
+
+9999999800000001
 */
