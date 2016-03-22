@@ -1,0 +1,14 @@
+PARTE COMUN
+1) Los enteros largos (EL) se implementarán
+como listas de caracteres, con un dígito por carácter, y por simplicidad se
+considerarán EL con un número de dígitos potencia de ocho (n=8k
+).
+EnteroLargo registro {
+    lista<char> digitos;
+    entero longitud;
+}
+
+MultiplicacionClasica (EnteroLargo e1, EnteroLargo e2) : EnteroLargo r
+Suma (EnteroLargo e1, EnteroLargo e2) : EnteroLargo r
+Resta (EnteroLargo e1, EnteroLargo e2) : EnteroLargo r
+Desplazador (EnteroLargo e, entero desp) : EnteroLargo r

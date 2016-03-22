@@ -1,0 +1,67 @@
+/*
+multClasica(EnteroLargo a, EnteroLargo b) : EnteroLargo r
+    EnteroLargo resultado;
+    array arrayEnteros of EnteroLargo[a.longitud];
+    
+    for i:= a.longitud to 1 do 
+        arrayEnteros[i] = MultEntero(EnteroLargo b, entero a.lista[i])
+    fin_for
+    
+    entero suma =0;
+    for i:= arrayEnteros.longitud to 1
+        arrayEnteros[i] + suma;
+    fin_for
+       
+
+MultEntero(EnteroLargo b, entero a) : enteroLargo r 
+    entero llevada = 0;
+    for i:= b.longitud to 1 do 
+        entero mult = b.lista[i]*a;
+        r.lista[i] = mult MOD 10 + llevada;
+        llevada = mult DIV 10;
+    fin_for
+    si (llevada <> 0) entonces
+        r.lista.front = insertar(llevada);
+        r.longitud = r.longitud+1;
+    fin_si
+
+Suma (EnteroLargo a, EnteroLargo b) : EnteroLargo r
+    entero llevada = 0;
+    entero longMenor = 0;
+    booleano menor;
+    // Si a es el menor, entonces menor=true. Si es b, menor=false.
+    
+    si a.longitud >= b.longitud entonces
+        longMenor:= b.longitud;
+        menor:= false;
+    si_no 
+        longMayor:= a.longitud;
+        menor:= true;
+    fin_si
+    
+    for i:= longMenor to 1 do
+        entero suma = (a.lista[i] + b.lista[i])
+        r.lista[i] = suma MOD 10 + llevada;
+        llevada = suma DIV 10;
+    fin_for
+    
+    añadirRestantes();
+
+
+                        12345 a
+                      *    55 b
+                        -----
+                        61725
+                     + 61725
+                      -------
+                       678975
+                       
+                       
+                      999999
+                          +1
+                    ----------
+                     1000000
+
+
+299999997
+*/
