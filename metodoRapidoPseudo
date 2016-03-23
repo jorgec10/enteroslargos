@@ -1,0 +1,6 @@
+r = u·v = 10^(2S)·w·y + 10^(S)·(w·z+x·y) + x·z 
+
+
+multRapida(EnteroLargo a, EnteroLargo b): EnteroLargo r
+    si a.longitud = 1 y b.longitud = 1 entonces
+        
