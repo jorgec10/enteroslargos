@@ -134,7 +134,7 @@ void EnteroLargo::desplazarEntero(int desp) {
 int main(void) {
     list<char> lectura;
     
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 32; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
@@ -142,7 +142,7 @@ int main(void) {
     EnteroLargo a = EnteroLargo(lectura);
     
     lectura.clear();
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 32; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
@@ -154,17 +154,17 @@ int main(void) {
     b.imprimir();
     
     
-    EnteroLargo suma = a.suma(b);
+    /*EnteroLargo suma = a.suma(b);
     cout << "La suma es: ";
     suma.imprimir();
     
     
     EnteroLargo a3 = a.multEntero(9);
     cout << "La mult por 9 es: ";
-    a3.imprimir();
+    a3.imprimir();*/
     
     EnteroLargo mult = a.multClasica(b);
-    cout << "La multEL es: ";
+    cout << "La multEL es: " << endl;
     mult.imprimir();
     
     

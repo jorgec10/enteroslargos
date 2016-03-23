@@ -119,7 +119,7 @@ EnteroLargo EnteroLargo::multRapida(EnteroLargo b){
     int s = longitud/2;
     if(longitud==1 && b.longitud==1){
         list<char> mult;
-        int a = (*digitos.begin() - '0') * (*b.digitos.begin() - '0')
+        int a = (*digitos.begin() - '0') * (*b.digitos.begin() - '0');
         int modulo = a % 10;
         int llevada = a/10;
         mult.push_back(modulo + '0');
@@ -128,13 +128,15 @@ EnteroLargo EnteroLargo::multRapida(EnteroLargo b){
         }
         return EnteroLargo(mult);
     } else {
-        EnteroLargo w = this.dividirEntero(true);
-        EnteroLargo x = this.dividirEntero(false);
+        EnteroLargo w = dividirEntero(true);
+        EnteroLargo x = dividirEntero(false);
         EnteroLargo y = b.dividirEntero(true);
         EnteroLargo z = b.dividirEntero(false);
         
-        EnteroLargo m1 = w.multRapida(y).desplazarEntero(2*s);
-        EnteroLargo m2 = w.multRapida(z).suma(x.multRapida(y)).desplazarEntero(s);
+        EnteroLargo m1 = w.multRapida(y);
+        m1.desplazarEntero(2*s);
+        EnteroLargo m2 = w.multRapida(z).suma(x.multRapida(y));
+        m2.desplazarEntero(s);
         EnteroLargo m3 = x.multRapida(z);
         
         EnteroLargo s1 = m1.suma(m2);
@@ -147,7 +149,7 @@ EnteroLargo EnteroLargo::multRapida(EnteroLargo b){
 int main(void) {
     list<char> lectura;
     
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 32; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
@@ -155,7 +157,7 @@ int main(void) {
     EnteroLargo a = EnteroLargo(lectura);
     
     lectura.clear();
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 32; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
@@ -164,5 +166,7 @@ int main(void) {
     
     a.imprimir();
     b.imprimir();
+    
+    cout << "La multiplicacion de los dos EL es: " << endl;
     a.multRapida(b).imprimir();
 }
