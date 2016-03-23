@@ -6,7 +6,7 @@ class EnteroLargo {
     private:
         list<char> digitos;
         int longitud;
-        
+
     public:
         EnteroLargo(list<char> entero);
         EnteroLargo();
@@ -33,32 +33,32 @@ EnteroLargo::EnteroLargo(list<char> entero){
 
 void EnteroLargo::imprimir() {
     list<char>::iterator it = --digitos.end();
-    
+
     while(it!=--digitos.begin()) {
         cout << *it;
         it--;
     }
-    
+
     cout << endl;
 }
 
 EnteroLargo EnteroLargo::suma(EnteroLargo b) {
     int llevada=0;
     list<char> resultado;
-    
+
     list<char>::iterator ita = digitos.begin();
     list<char>::iterator itb = b.digitos.begin();
-    
-  
+
+
     while(ita != digitos.end() && itb != b.digitos.end()) {
         int suma = (*ita - '0') + (*itb - '0') + llevada;
         resultado.push_back((suma % 10) + '0');
         llevada = suma/10;
-        
+
         ita++;
         itb++;
     }
-    
+
     if (ita == digitos.end()) {
         while(itb != b.digitos.end()){
             int suma=(*itb - '0') + llevada;
@@ -74,21 +74,21 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
             ita++;
         }
     }
-    
+
     if (llevada != 0) {
         resultado.push_back(llevada + '0');
     }
-    
+
     return EnteroLargo(resultado);
 }
 
 EnteroLargo EnteroLargo::resta(EnteroLargo b) {
     int llevada=0;
     list<char> resultado;
-    
+
     list<char>::iterator ita = digitos.begin();
     list<char>::iterator itb = b.digitos.begin();
-    
+
     while(ita != digitos.end() && itb != b.digitos.end()) {
         int resta;
 
@@ -99,6 +99,8 @@ EnteroLargo EnteroLargo::resta(EnteroLargo b) {
             resta = ((*ita - '0') + 10) - ((*itb -'0') + llevada);
             llevada = 1;
         }
+        ita++;
+        itb++;
         resultado.push_back(resta + '0');
     }
     return EnteroLargo(resultado);
@@ -134,9 +136,9 @@ EnteroLargo EnteroLargo::dividirEntero(bool mitad){
             it++;
         }
     }
-    
+
     return EnteroLargo(resultado);
-    
+
 }
 
 EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
@@ -156,7 +158,7 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
         EnteroLargo x = dividirEntero(false);
         EnteroLargo y = b.dividirEntero(true);
         EnteroLargo z = b.dividirEntero(false);
-        
+
         EnteroLargo m1 = w.multKarat(y);
         m1.desplazarEntero(2*s);
 
@@ -165,8 +167,8 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
         EnteroLargo m2 = w.resta(x).multKarat(z.resta(y));
         m2 = m2.suma(m1).suma(m3);
         m2.desplazarEntero(s);
-        
-        
+
+
         EnteroLargo s1 = m1.suma(m2);
         EnteroLargo solucion = s1.suma(m3);
         return EnteroLargo(solucion.digitos);
@@ -176,14 +178,14 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
 
 int main(void) {
     list<char> lectura;
-    
+
     for (int i = 0; i < 8; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
     }
     EnteroLargo a = EnteroLargo(lectura);
-    
+
     lectura.clear();
     for (int i = 0; i < 8; i++) {
         char digito;
@@ -191,10 +193,11 @@ int main(void) {
         lectura.push_front(digito);
     }
     EnteroLargo b = EnteroLargo(lectura);
-    
+
     a.imprimir();
     b.imprimir();
-    
-    /*cout << "La multiplicacion de los dos EL es: " << endl;
-    a.multKarat(b).imprimir();*/
+    a.resta(b).imprimir();
+
+    cout << "La multiplicacion de los dos EL es: " << endl;
+    a.multKarat(b).imprimir();
 }
