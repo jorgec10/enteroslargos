@@ -134,7 +134,7 @@ void EnteroLargo::desplazarEntero(int desp) {
 int main(void) {
     list<char> lectura;
     
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 1024; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
@@ -142,7 +142,7 @@ int main(void) {
     EnteroLargo a = EnteroLargo(lectura);
     
     lectura.clear();
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 1024; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
