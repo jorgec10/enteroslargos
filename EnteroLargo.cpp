@@ -1,24 +1,8 @@
+#include "EnteroLargo.h"
 #include <iostream>
 #include <list>
 using namespace std;
 
-class EnteroLargo {
-    private:
-        list<char> digitos;
-        int longitud;
-        bool signo;  // True -> positivo, False -> negativo
-
-    public:
-        EnteroLargo(list<char> entero, bool sig);
-        EnteroLargo();
-        void imprimir();
-        EnteroLargo suma(EnteroLargo b);
-        void desplazarEntero(int desp);
-        EnteroLargo * dividirEntero();
-        EnteroLargo multKarat(EnteroLargo b);
-        EnteroLargo resta(EnteroLargo b);
-        int compara(EnteroLargo b);
-};
 
 EnteroLargo::EnteroLargo(){
     longitud = 0;
@@ -34,6 +18,11 @@ EnteroLargo::EnteroLargo(list<char> entero, bool sig){
     signo = sig;
     longitud = entero.size();
 }
+
+void EnteroLargo::setSigno(bool sign) {
+    signo = sign;
+}
+
 
 void EnteroLargo::imprimir() {
     if (signo) {
@@ -204,6 +193,85 @@ EnteroLargo * EnteroLargo::dividirEntero(){
 
 }
 
+EnteroLargo EnteroLargo::multSencilla(int a) {
+    int llevada = 0;
+    list<char> resultado;
+    
+    list<char>::iterator it = digitos.begin();
+    while (it != digitos.end()){
+        int mult = ((*it - '0') * a) + llevada;
+        resultado.push_back((mult % 10) + '0');
+        llevada = mult/10;
+        it++;
+    }
+    
+    if (llevada != 0) {
+        resultado.push_back(llevada + '0');
+    }
+    
+    return EnteroLargo(resultado, signo);
+}
+
+EnteroLargo EnteroLargo::multClasica(EnteroLargo b){
+    list<char> resultado;
+    EnteroLargo prodInt[longitud];
+    int i = 0;
+    
+    
+    list<char>::iterator it = digitos.begin();
+
+    while(it != digitos.end()){
+
+        prodInt[i]= b.multSencilla(*it - '0');
+        prodInt[i].desplazarEntero(i);
+        it++;
+        i++;
+    }
+    
+    for (int j = 1; j < longitud; j++) {
+        prodInt[j] = prodInt[j-1].suma(prodInt[j]);
+    }
+    
+    if(b.signo = signo) prodInt[longitud-1].setSigno(true);
+    else prodInt[longitud-1].setSigno(false);
+    
+    return prodInt[longitud-1];
+    
+}
+
+EnteroLargo EnteroLargo::multNoRapida(EnteroLargo b){
+    int s = longitud/2;
+    if(longitud==1 && b.longitud==1){
+        list<char> mult;
+        int a = (*digitos.begin() - '0') * (*b.digitos.begin() - '0');
+        int modulo = a % 10;
+        int llevada = a/10;
+        mult.push_back(modulo + '0');
+        if(llevada != 0){
+            mult.push_back(llevada + '0');
+        }
+        return EnteroLargo(mult, signo);
+    } else {
+        EnteroLargo * ptrA = this->dividirEntero();
+        EnteroLargo * ptrB = b.dividirEntero();
+        
+        EnteroLargo w = *ptrA;
+        EnteroLargo x = *(ptrA + 1);
+        EnteroLargo y = *ptrB;
+        EnteroLargo z = *(ptrB + 1);
+        
+        EnteroLargo m1 = w.multNoRapida(y);
+        m1.desplazarEntero(2*s);
+        EnteroLargo m2 = w.multNoRapida(z).suma(x.multNoRapida(y));
+        m2.desplazarEntero(s);
+        EnteroLargo m3 = x.multNoRapida(z);
+        
+        EnteroLargo s1 = m1.suma(m2);
+        EnteroLargo solucion = s1.suma(m3);
+        return EnteroLargo(solucion.digitos, signo);
+    }
+}
+    
 EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
     int s = longitud/2;
     if(longitud==1 && b.longitud==1){
@@ -226,15 +294,6 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
         EnteroLargo y = *ptrB;
         EnteroLargo z = *(ptrB + 1);
         
-        
-        
-        
-        /*
-        EnteroLargo w = dividirEntero(true);
-        EnteroLargo x = dividirEntero(false);
-        EnteroLargo y = b.dividirEntero(true);
-        EnteroLargo z = b.dividirEntero(false);*/
-
         EnteroLargo m1 = w.multKarat(y);
         
         EnteroLargo m3 = x.multKarat(z);
@@ -250,32 +309,4 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
         
         return EnteroLargo(solucion.digitos, signo);
     }
-}
-
-
-int main(void) {
-    list<char> lectura;
-
-    for (int i = 0; i < 1024; i++) {
-        char digito;
-        cin >> digito;
-        lectura.push_front(digito);
-    }
-    EnteroLargo a = EnteroLargo(lectura, true);
-
-    lectura.clear();
-    for (int i = 0; i < 1024; i++) {
-        char digito;
-        cin >> digito;
-        lectura.push_front(digito);
-    }
-    EnteroLargo b = EnteroLargo(lectura, true);
-    
-    cout << "a: ";
-    a.imprimir();
-    cout << "b: ";
-    b.imprimir();
-    
-    cout << "La multiplicacion de los dos EL es: " << endl;
-    a.multKarat(b).imprimir();
 }

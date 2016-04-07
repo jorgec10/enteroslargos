@@ -13,7 +13,7 @@ class EnteroLargo {
         void imprimir();
         EnteroLargo suma(EnteroLargo b);
         void desplazarEntero(int desp);
-        EnteroLargo dividirEntero(bool mitad);
+        EnteroLargo * dividirEntero();
         EnteroLargo multRapida(EnteroLargo b);
 };
 
@@ -88,31 +88,32 @@ void EnteroLargo::desplazarEntero(int desp) {
     longitud+=desp;
 }
 
-EnteroLargo EnteroLargo::dividirEntero(bool mitad){
-    list<char> resultado;
+EnteroLargo * EnteroLargo::dividirEntero(){
+    list<char> primeraMitad;
+    list<char> segundaMitad;
     int s = longitud/2;
     int indice = 0;
-    if(!mitad){ // Primera mitad
-        list<char>::iterator it = digitos.begin();
-        while(it != digitos.end() && indice < s){
-            resultado.push_back(*it);
-            it++;
-            indice++;
-        }
-    } else { // Segunda mitad
-        list<char>::iterator it = digitos.begin();
-        while(it !=digitos.end() && indice < s){
-            it++;
-            indice++;
-        }
-        while(it != digitos.end()){
-            resultado.push_back(*it);
-            it++;
-        }
+    static EnteroLargo resultado[2];
+    
+    list<char>::iterator it = digitos.begin();
+    while(it != digitos.end() && indice < s){
+        primeraMitad.push_back(*it);
+        it++;
+        indice++;
+    }
+    while(it != digitos.end()){
+        segundaMitad.push_back(*it);
+        it++;
     }
     
-    return EnteroLargo(resultado);
+    EnteroLargo primero = EnteroLargo(primeraMitad);
+    EnteroLargo segundo = EnteroLargo(segundaMitad);
     
+    resultado[0] = primero;
+    resultado[1] = segundo;
+
+    return resultado;
+
 }
 
 EnteroLargo EnteroLargo::multRapida(EnteroLargo b){
@@ -128,10 +129,13 @@ EnteroLargo EnteroLargo::multRapida(EnteroLargo b){
         }
         return EnteroLargo(mult);
     } else {
-        EnteroLargo w = dividirEntero(true);
-        EnteroLargo x = dividirEntero(false);
-        EnteroLargo y = b.dividirEntero(true);
-        EnteroLargo z = b.dividirEntero(false);
+        EnteroLargo * ptrA = this->dividirEntero();
+        EnteroLargo * ptrB = b.dividirEntero();
+        
+        EnteroLargo w = *ptrA;
+        EnteroLargo x = *(ptrA + 1);
+        EnteroLargo y = *ptrB;
+        EnteroLargo z = *(ptrB + 1);
         
         EnteroLargo m1 = w.multRapida(y);
         m1.desplazarEntero(2*s);
