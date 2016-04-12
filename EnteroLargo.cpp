@@ -25,9 +25,7 @@ void EnteroLargo::setSigno(bool sign) {
 
 
 void EnteroLargo::imprimir() {
-    if (signo) {
-        cout << "+";
-    } else {
+    if (!signo) {
         cout << "-";
     } 
         
@@ -38,8 +36,6 @@ void EnteroLargo::imprimir() {
         cout << *it;
         it--;
     }
-
-    cout << endl;
 }
 
 int EnteroLargo::compara(EnteroLargo b){
