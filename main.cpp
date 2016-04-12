@@ -23,13 +23,18 @@ int main(void) {
     
     cout << "a: ";
     a.imprimir();
+    cout << endl;
     cout << "b: ";
     b.imprimir();
+    cout << endl;
     
     cout << "La multiplicacion clasica de los dos EL es: " << endl;
     a.multClasica(b).imprimir();
+    cout << endl;
     cout << "La multiplicacion no rapida de los dos EL es: " << endl;
     a.multNoRapida(b).imprimir();
+    cout << endl;
     cout << "La multiplicacion karat de los dos EL es: " << endl;
     a.multKarat(b).imprimir();
+    cout << endl;
 }
