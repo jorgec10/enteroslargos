@@ -1,6 +1,7 @@
 #include <iostream>
 #include "EnteroLargo.h"
 #include "Entero820.h"
+#include <string>
 using namespace std;
 
 

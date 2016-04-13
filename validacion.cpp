@@ -4,6 +4,8 @@
 using namespace std;
 
 
+
+
 bool formatoCorrecto(int longitud) {
     while (longitud > 8) {
             if (longitud%2 == 0)
@@ -19,28 +21,49 @@ bool formatoCorrecto(int longitud) {
 
 int main(void) {
     
-    list<char> digitosEL;
-    list<char> digitosEL820;
+    EnteroLargo a, b;
+    Entero820 a820, b820;
+    string lectura;
     
-    for (int i = 0; i < 2; i++) {
-        
-        string lectura;
-        int longitud = 0;
-        
+    do {
         cin >> lectura;
-        
-        for (int i = 0; i < lectura.size(); i++) {
-            
-            digitosEL.push_front(lectura[i]);
-            digitosEL820.push_front(lectura[i]);
-            
-            longitud++;
-            
-            if (longitud ) 
-        }
-        //cout << formatoCorrecto(longitud) << endl;
-        //digitosEL.clear();
-    }
+        a = EnteroLargo(lectura, true);
+        a820 = Entero820(I, J, lectura);
+    } while (!formatoCorrecto(lectura.size()));
+    
+    do {
+        cin >> lectura;
+        b = EnteroLargo(lectura, true);
+        b820 = Entero820(K, L, lectura);
+    } while (!formatoCorrecto(lectura.size()));
+    
+    a.imprimir();
+    cout << endl;
+    
+    b.imprimir();
+    cout << endl;
+    
+    a820.imprimir();
+    cout << endl;
+    
+    b820.imprimir();
+    cout << endl;
+    
+    
+    cout << "Let's multiplicate" << endl;
+    cout << endl;
+    a.multNoRapida(b).imprimir(); 
+    cout << endl;
+    a.multKarat(b).imprimir(); 
+    cout << endl;
+    
+    cout << "Multiplicando enteros820" << endl;
+    a820.mult820Clasica(b820).imprimir();
+    cout << endl;
+    a820.mult820NoRapida(b820).imprimir(); 
+    cout << endl;
+    a820.mult820Karat(b820).imprimir();
+    cout << endl;
     
     
     

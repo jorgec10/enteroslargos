@@ -1,6 +1,8 @@
 #ifndef _ENTERO_LARGO_
 #define _ENTERO_LARGO_
 #include <list>
+#include <string>
+
 using namespace std;
 
 class EnteroLargo {
@@ -13,11 +15,14 @@ class EnteroLargo {
         void setSigno(bool sign);
 
     public:
-        EnteroLargo(list<char> entero, bool sig);
         EnteroLargo();
-        
+        EnteroLargo(string entero, bool sig);
+        EnteroLargo(list<char> entero, bool sig);
+       
         void imprimir();
         void desplazarEntero(int desp);
+        
+        EnteroLargo dividirEntero(bool mitad);
         EnteroLargo * dividirEntero();
         
         EnteroLargo suma(EnteroLargo b);
