@@ -286,35 +286,43 @@ EnteroLargo EnteroLargo::multSencilla(int a) {
 }
 
 EnteroLargo EnteroLargo::multClasica(EnteroLargo b){
-    list<char> resultado;
-    EnteroLargo prodInt[longitud];
+    EnteroLargo resultado;
+    //EnteroLargo prodInt[longitud];
     int i = 0;
     
     
     list<char>::iterator it = digitos.begin();
 
     while(it != digitos.end()){
-
-        prodInt[i]= b.multSencilla(*it - '0');
-        prodInt[i].desplazarEntero(i);
+        EnteroLargo parcial;
+        parcial = b.multSencilla(*it -'0');
+        parcial.desplazarEntero(i);
+        resultado = resultado.suma(parcial);
+        //prodInt[i]= b.multSencilla(*it - '0');
+        //prodInt[i].desplazarEntero(i);
         it++;
         i++;
     }
     
+    /*
     for (int j = 1; j < longitud; j++) {
         prodInt[j] = prodInt[j-1].suma(prodInt[j]);
     }
     
     if(b.signo = signo) prodInt[longitud-1].setSigno(true);
     else prodInt[longitud-1].setSigno(false);
+    */
     
-    return prodInt[longitud-1];
+    if(b.signo != signo) resultado.setSigno(false);
+    else resultado.setSigno(true);
     
+    //return prodInt[longitud-1];
+    return resultado;
 }
 
 EnteroLargo EnteroLargo::multNoRapida(EnteroLargo b){
     int s = longitud/2;
-    if(longitud==1 && b.longitud==1){
+    if(longitud==1 || b.longitud==1){
         list<char> mult;
         int a = (*digitos.begin() - '0') * (*b.digitos.begin() - '0');
         int modulo = a % 10;
