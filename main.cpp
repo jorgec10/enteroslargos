@@ -6,7 +6,7 @@ using namespace std;
 int main(void) {
 	list<char> lectura;
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 64; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
@@ -14,15 +14,15 @@ int main(void) {
     EnteroLargo a = EnteroLargo(lectura, true);
 
     lectura.clear();
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 64; i++) {
         char digito;
         cin >> digito;
         lectura.push_front(digito);
     }
     EnteroLargo b = EnteroLargo(lectura, true);
     
-    EnteroLargo prueba1 = EnteroLargo("14", false);
-    EnteroLargo prueba2 = EnteroLargo("8", false);
+    //EnteroLargo prueba1 = EnteroLargo("6", false);
+    //EnteroLargo prueba2 = EnteroLargo("6", true);
     
     
     
@@ -38,24 +38,24 @@ int main(void) {
     b.imprimir();
     cout << endl;
     
-    cout << "La multiplicacion clasica de los dos EL es: " << endl;
+    //cout << "La multiplicacion clasica de los dos EL es: " << endl;
     a.multClasica(b).imprimir();
     cout << endl;
-    cout << "La multiplicacion no rapida de los dos EL es: " << endl;
+    //cout << "La multiplicacion no rapida de los dos EL es: " << endl;
     a.multNoRapida(b).imprimir();
     cout << endl;
-    cout << "La multiplicacion karat de los dos EL es: " << endl;
+    //cout << "La multiplicacion karat de los dos EL es: " << endl;
     a.multKarat(b).imprimir();
     cout << endl;
     
-    cout << endl << "Compara: ";
+    /*cout << endl << "Compara: ";
     cout << prueba1.compara(prueba2);
     cout << endl;
     
     cout << endl << "Prueba: ";
     prueba1.suma(prueba2).imprimir();
     cout << endl;
-    
+    */
 
     
     

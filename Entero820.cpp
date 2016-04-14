@@ -11,18 +11,10 @@ Entero820::Entero820(int posA, int posB, string entero){
     primer0 = posA;
     segundo0 = posB;
     
-    int longitud = entero.size();
-    list<char> digitosEL;
-    
     for (int i = 0; i < EL820SIZE; i++) {
         string inserta = entero.substr(i*ELSIZE, ELSIZE);
-        enteros[i] = EnteroLargo(inserta, true);
-        
-        /*digitosEL.push_front(entero[i]);
-        if (i % ELSIZE == 0 && i!=0){
-            enteros[(i/ELSIZE)-1] = EnteroLargo(digitosEL, true);
-            digitosEL.clear();
-        }*/
+
+        enteros[EL820SIZE-1-i] = EnteroLargo(inserta, true);
     }
 }
 
@@ -38,7 +30,7 @@ Entero820::Entero820(int posA, int posB, EnteroLargo arrayEnteros[]){
 
 void Entero820::imprimir() {
     for (int i = 0; i < EL820SIZE; i++) {
-        enteros[i].imprimir();
+        enteros[ELSIZE-1-i].imprimir();
     }
 }
 

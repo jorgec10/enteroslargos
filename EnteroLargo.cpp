@@ -58,11 +58,11 @@ int EnteroLargo::compara(EnteroLargo b){
         b.longitud--;
     }
     
-    cout << endl;
+   /*cout << endl;
     imprimir();
     cout<<endl;
     b.imprimir();
-    cout << endl;
+    cout << endl;*/
     
     if (longitud > b.longitud) return 1;
     else if (longitud < b.longitud) return -1;
@@ -162,7 +162,7 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
         while(itMayor != finMayor && itMenor != finMenor) {
             int resta;
     
-            if (*itMayor >= *itMenor){
+            if (*itMayor >= (*itMenor + llevada)){
                 resta = (*itMayor - '0') - ((*itMenor -'0') + llevada);
                 llevada = 0;
             } else {
@@ -176,23 +176,23 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
         
         if (itMayor == finMayor) {
             while(itMenor != finMenor){
-                int suma=(*itMenor - '0') + llevada;
-                resultado.push_back((suma % 10) + '0');
-                llevada = suma/10;
+                int resta=(*itMenor - '0') - llevada;
+                resultado.push_back((resta % 10) + '0');
+                llevada = resta/10;
                 itMenor++;
             }
         } else {
             while(itMayor != finMayor){
-                int suma=(*itMayor - '0') + llevada;
-                resultado.push_back((suma % 10) + '0');
-                llevada = suma/10;
+                int resta=(*itMayor - '0') - llevada;
+                resultado.push_back((resta % 10) + '0');
+                llevada = resta/10;
                 itMayor++;
             }
         }
-    
+    /*
         if (llevada != 0) {
             resultado.push_back(llevada + '0');
-        }
+        }*/
         
         
         return EnteroLargo(resultado, signoMayor);
@@ -355,7 +355,7 @@ EnteroLargo EnteroLargo::multNoRapida(EnteroLargo b){
 EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
     
     int s = longitud/2;
-    if(longitud==1 && b.longitud==1){
+    if(longitud==1 || b.longitud==1){
         list<char> mult;
         int a = (*digitos.begin() - '0') * (*b.digitos.begin() - '0');
         int modulo = a % 10;
@@ -372,9 +372,9 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
         else {
             r = EnteroLargo(mult, true);
         }
-        cout << "directa: ";
-        r.imprimir();
-        cout << endl;
+       // cout << "directa: ";
+        //r.imprimir();
+        //cout << endl;
         return r;
         //if(signo != b.signo) return EnteroLargo(mult, false);
         //else return EnteroLargo(mult, true);
@@ -400,22 +400,22 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
         
         EnteroLargo m2 = w.resta(x).multKarat(z.resta(y));
         
-        cout << "m2a: ";
-        m2.imprimir();
-        cout << endl;
+        //cout << "m2a: ";
+        //m2.imprimir();
+        //cout << endl;
         
         m2 = m2.suma(m1);
         
-        cout << "m2b: ";
-        m2.imprimir();
-        cout << endl;
+        //cout << "m2b: ";
+        //m2.imprimir();
+        //cout << endl;
         
         m2 = m2.suma(m3);
         //m2 = m2.suma(m1).suma(m3);
         
-        cout << "m2c: ";
-        m2.imprimir();
-        cout << endl;
+        //cout << "m2c: ";
+        //m2.imprimir();
+        //cout << endl;
        
         m1.desplazarEntero(2*s);
         m2.desplazarEntero(s);
@@ -423,9 +423,9 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo b){
         EnteroLargo s1 = m1.suma(m2);
         EnteroLargo solucion = s1.suma(m3);
         
-        cout << "solucion: ";
-        solucion.imprimir();
-        cout << endl << endl;
+        //cout << "solucion: ";
+        //solucion.imprimir();
+        //cout << endl << endl;
         
         if(signo != b.signo) return EnteroLargo(solucion.digitos, false);
         else return EnteroLargo(solucion.digitos, true);

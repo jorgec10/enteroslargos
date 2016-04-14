@@ -51,11 +51,12 @@ int main(void) {
     
     
     cout << "Let's multiplicate" << endl;
+    a.multClasica(b).imprimir(); 
     cout << endl;
     a.multNoRapida(b).imprimir(); 
     cout << endl;
     a.multKarat(b).imprimir(); 
-    cout << endl;
+    cout << endl << endl;
     
     cout << "Multiplicando enteros820" << endl;
     a820.mult820Clasica(b820).imprimir();
