@@ -3,7 +3,6 @@
 #include <time.h>
 #include <sys/time.h>
 #include "EnteroLargo.h"
-#include "Entero820.h"
 using namespace std;
 
 EnteroLargo generadorEntero(int tamano){
@@ -14,34 +13,12 @@ EnteroLargo generadorEntero(int tamano){
     return EnteroLargo(generado, true);
 }
 
-Entero820 generador820(int posA, int posB, int tamEL){
-    EnteroLargo enteros[EL820SIZE];
-    
-    string ceros;
-    ceros.reserve(tamEL);
-    
-    for (int i = 0; i < tamEL; i++) {
-        ceros.push_back('0');
-    }
-    
-    for (int i = 0; i < EL820SIZE; i++) {
-        if(i==posA || i==posB){
-            enteros[EL820SIZE-i-1] = EnteroLargo(ceros, true);
-        }else enteros[EL820SIZE-i-1] = generadorEntero(tamEL);
-    }
-    return Entero820(posA, posB, enteros);
-}
-
-
 void experimentos(int size) {
     
 
     EnteroLargo a = generadorEntero(size);
     EnteroLargo b = generadorEntero(size);
   
-    Entero820 a820 = generador820(I, J, size);
-    Entero820 b820 = generador820(K, L, size);
-    
     struct timeval inicio, fin;
     double tiempo;
     
@@ -61,24 +38,6 @@ void experimentos(int size) {
     
     gettimeofday(&inicio, NULL);
     a.multKarat(b);
-    gettimeofday(&fin, NULL);
-    tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
-    cout << tiempo << ", ";
-    
-    gettimeofday(&inicio, NULL);
-    a820.mult820Clasica(b820);
-    gettimeofday(&fin, NULL);
-    tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
-    cout << tiempo << ", ";
-    
-    gettimeofday(&inicio, NULL);
-    a820.mult820NoRapida(b820);
-    gettimeofday(&fin, NULL);
-    tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
-    cout << tiempo << ", ";
-    
-    gettimeofday(&inicio, NULL);
-    a820.mult820Karat(b820);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
     cout << tiempo << endl;

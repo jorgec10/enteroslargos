@@ -6,6 +6,12 @@ a.out: main.o EnteroLargo.o
 
 val.out: validacion.o EnteroLargo.o Entero820.o
 	g++ validacion.o EnteroLargo.o Entero820.o -o val.out
+
+exp.out: experimento.o EnteroLargo.o Entero820.o
+	g++ experimento.o EnteroLargo.o Entero820.o -o exp.out
+
+expEL.out: experimentoEL.o EnteroLargo.o Entero820.o
+	g++ experimentoEL.o EnteroLargo.o Entero820.o -o expEL.out
 	
 EnteroLargo.o: EnteroLargo.cpp EnteroLargo.h
 	g++ -c EnteroLargo.cpp
@@ -22,6 +28,12 @@ main820.o: main820.cpp EnteroLargo.h Entero820.h
 val.o: validacion.cpp EnteroLargo.h Entero820.h
 	g++ -c validacion.cpp
 
+experimento.o: experimento.cpp EnteroLargo.h Entero820.h
+	g++ -c experimento.cpp
+
+experimentoEL.o: experimentoEL.cpp EnteroLargo.h Entero820.h
+	g++ -c experimentoEL.cpp
+	
 run: a.out
 	./a.out < entrada.txt
 
