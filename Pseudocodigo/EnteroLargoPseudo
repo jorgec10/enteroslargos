@@ -19,10 +19,10 @@ multNoRapida(Entero820 a, Entero820 b) : EnteroLargo r {
     si (a.longitud == 1 OR b.longitud == 1) entonces devuelve a * b
     si_no
         entero s = a.longitud/2;
-        EnteroLargo w := a.primeraMitad();
-        EnteroLargo x := a.segundaMitad();
-        EnteroLargo y := b.primeraMitad();
-        EnteroLargo z := b.segundaMitad();
+        EnteroLargo w := a.dividir(true);
+        EnteroLargo x := a.dividir(false);
+        EnteroLargo y := b.dividir(true);
+        EnteroLargo z := b.dividir(false);
         
         EnteroLargo m1 = multNoRapida(w,y);
         m1.desplazar(2*s);

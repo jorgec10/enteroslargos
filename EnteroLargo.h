@@ -18,6 +18,8 @@ class EnteroLargo {
         EnteroLargo();
         EnteroLargo(string entero, bool sig);
         EnteroLargo(list<char> entero, bool sig);
+        
+        int getLongitud();
        
         void imprimir();
         void desplazarEntero(int desp);

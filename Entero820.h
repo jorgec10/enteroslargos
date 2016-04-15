@@ -4,7 +4,6 @@
 #include "EnteroLargo.h"
 
 #define EL820SIZE 8
-#define ELSIZE 8
 
 #define I 0
 #define J 2
@@ -13,9 +12,10 @@
 
 class Entero820 {
     private:
-        EnteroLargo enteros[ELSIZE];
+        EnteroLargo enteros[EL820SIZE];
         int primer0;
         int segundo0;
+        int tamEL;
         
     public:
         Entero820();

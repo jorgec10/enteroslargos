@@ -27,6 +27,10 @@ EnteroLargo::EnteroLargo(list<char> entero, bool sig){
     longitud = entero.size();
 }
 
+int EnteroLargo::getLongitud(){
+    return longitud;
+}
+
 void EnteroLargo::setSigno(bool sign) {
     signo = sign;
 }
