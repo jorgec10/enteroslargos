@@ -45,7 +45,7 @@ void experimentos(int size) {
     struct timeval inicio, fin;
     double tiempo;
     
-    cout << size << ": ";
+    cout << size << ", ";
     
     gettimeofday(&inicio, NULL);
     a.multClasica(b);
@@ -92,6 +92,7 @@ int main(int argc, char* argv[]){
     int tamInicial = atoi(argv[1]);
     int tamFinal = atoi(argv[2]);
     
+    cout << "Size, Clasica, noRapida, Karat, 820Clasica, 820noRapida, 820Karat" << endl;
     for (int i = tamInicial; i <= tamFinal; i=i*2) {
         experimentos(i);
     }
