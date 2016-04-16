@@ -11,9 +11,9 @@ Entero820::Entero820(){
 Entero820::Entero820(int posA, int posB, string entero){
     primer0 = posA;
     segundo0 = posB;
-    
+
     tamEL = entero.size()/EL820SIZE;
-    
+
     for (int i = 0; i < EL820SIZE; i++) {
         string inserta = entero.substr(i*tamEL, tamEL);
 
@@ -24,9 +24,9 @@ Entero820::Entero820(int posA, int posB, string entero){
 Entero820::Entero820(int posA, int posB, EnteroLargo arrayEnteros[]){
     primer0=posA;
     segundo0=posB;
-    
+
     tamEL = arrayEnteros[0].getLongitud();
-    
+
     for (int i = 0; i < EL820SIZE; i++) {
         enteros[EL820SIZE-1-i]=arrayEnteros[i];
     }
@@ -41,84 +41,84 @@ void Entero820::imprimir() {
 
 EnteroLargo Entero820::mult820Clasica(Entero820 b){
     EnteroLargo resultado;
-    
+
     for (int i = 0; i < EL820SIZE; i++) {
         EnteroLargo parcial;
-        
+
        if (i == b.primer0 || i == b.segundo0) {
-              continue;  
+              continue;
         }
-        
+
         for (int j = 0; j < EL820SIZE; j++) {
-            
+
              if (j == primer0 || j == segundo0) {
-              continue;  
+              continue;
             }
-        
+
             EnteroLargo mult = b.enteros[i].multClasica(enteros[j]);
             mult.desplazarEntero(j*tamEL);
             parcial = parcial.suma(mult);
         }
-        
+
         parcial.desplazarEntero(i*tamEL);
         resultado = resultado.suma(parcial);
     }
-    
+
     return resultado;
 }
 
-EnteroLargo Entero820::mult820NoRapida(Entero820 b){
+EnteroLargo Entero820::mult820NoRapida(Entero820 b, int casoBase){
     EnteroLargo resultado;
-    
+
     for (int i = 0; i < EL820SIZE; i++) {
         EnteroLargo parcial;
-        
+
        if (i == b.primer0 || i == b.segundo0) {
-              continue;  
+              continue;
         }
-        
+
         for (int j = 0; j < EL820SIZE; j++) {
-            
+
              if (j == primer0 || j == segundo0) {
-              continue;  
+              continue;
             }
-        
-            EnteroLargo mult = b.enteros[i].multNoRapida(enteros[j]);
+
+            EnteroLargo mult = b.enteros[i].multNoRapida(enteros[j], casoBase);
             mult.desplazarEntero(j*tamEL);
             parcial = parcial.suma(mult);
         }
-        
+
         parcial.desplazarEntero(i*tamEL);
         resultado = resultado.suma(parcial);
     }
-    
+
     return resultado;
 }
 
-EnteroLargo Entero820::mult820Karat(Entero820 b){
+EnteroLargo Entero820::mult820Karat(Entero820 b, int casoBase){
     EnteroLargo resultado;
-    
+
     for (int i = 0; i < EL820SIZE; i++) {
         EnteroLargo parcial;
-        
+
        if (i == b.primer0 || i == b.segundo0) {
-              continue;  
+              continue;
         }
-        
+
         for (int j = 0; j < EL820SIZE; j++) {
-            
+
              if (j == primer0 || j == segundo0) {
-              continue;  
+              continue;
             }
-        
-            EnteroLargo mult = b.enteros[i].multKarat(enteros[j]);
+
+            EnteroLargo mult = b.enteros[i].multKarat(enteros[j], casoBase);
             mult.desplazarEntero(j*tamEL);
             parcial = parcial.suma(mult);
         }
-        
+
         parcial.desplazarEntero(i*tamEL);
         resultado = resultado.suma(parcial);
     }
-    
+
     return resultado;
 }

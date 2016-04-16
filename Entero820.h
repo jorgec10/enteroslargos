@@ -16,17 +16,17 @@ class Entero820 {
         int primer0;
         int segundo0;
         int tamEL;
-        
+
     public:
         Entero820();
         Entero820(int posA, int posB, string entero);
         Entero820(int posA, int posB, EnteroLargo arrayEnteros[]);
-        
+
         void imprimir();
-        
+
         EnteroLargo mult820Clasica(Entero820 b);
-        EnteroLargo mult820NoRapida(Entero820 b);
-        EnteroLargo mult820Karat(Entero820 b);
+        EnteroLargo mult820NoRapida(Entero820 b, int casoBase);
+        EnteroLargo mult820Karat(Entero820 b, int casoBase);
 };
 
 #endif

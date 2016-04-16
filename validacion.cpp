@@ -12,7 +12,7 @@ bool formatoCorrecto(int longitud) {
                 longitud = longitud/2;
             else break;
     }
-        
+
     if (longitud == 8) {
         return true;
     }
@@ -20,52 +20,52 @@ bool formatoCorrecto(int longitud) {
 }
 
 int main(void) {
-    
+
     EnteroLargo a, b;
     Entero820 a820, b820;
     string lectura;
-    
+
     do {
         cin >> lectura;
         a = EnteroLargo(lectura, true);
         a820 = Entero820(I, J, lectura);
     } while (!formatoCorrecto(lectura.size()));
-    
+
     do {
         cin >> lectura;
         b = EnteroLargo(lectura, true);
         b820 = Entero820(K, L, lectura);
     } while (!formatoCorrecto(lectura.size()));
-    
+
     a.imprimir();
     cout << endl;
-    
+
     b.imprimir();
     cout << endl;
-    
+
     a820.imprimir();
     cout << endl;
-    
+
     b820.imprimir();
     cout << endl;
-    
-    
+
+
     cout << "Let's multiplicate" << endl;
-    a.multClasica(b).imprimir(); 
+    a.multClasica(b).imprimir();
     cout << endl;
-    a.multNoRapida(b).imprimir(); 
+    a.multNoRapida(b, 1).imprimir();
     cout << endl;
-    a.multKarat(b).imprimir(); 
+    a.multKarat(b, 1).imprimir();
     cout << endl << endl;
-    
+
     cout << "Multiplicando enteros820" << endl;
     a820.mult820Clasica(b820).imprimir();
     cout << endl;
-    a820.mult820NoRapida(b820).imprimir(); 
+    a820.mult820NoRapida(b820, 1).imprimir();
     cout << endl;
-    a820.mult820Karat(b820).imprimir();
+    a820.mult820Karat(b820, 1).imprimir();
     cout << endl;
-    
-    
-    
+
+
+
 }
