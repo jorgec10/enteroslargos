@@ -7,10 +7,18 @@ using namespace std;
 
 class EnteroLargo {
     private:
+        // Lista de caracteres donde se almacenan los digitos del entero largo.
+        // Se almacenan en orden inverso para facilitar su tratamiento.
         list<char> digitos;
+        // Longitud del entero. Permite no tener que obtener la longitud de la
+        // lista cada vez que se necesita.
         int longitud;
-        bool signo;  // True -> positivo, False -> negativo
+        // True: positivo. False: negativo.
+        bool signo;  
 
+
+        // Todos los métodos están documentados en EnteroLargo.cpp
+        
         static EnteroLargo multSencilla(EnteroLargo a, int b);
         void setSigno(bool sign);
 
@@ -25,7 +33,7 @@ class EnteroLargo {
         void desplazarEntero(int desp);
 
         EnteroLargo dividirEntero(bool mitad);
-        EnteroLargo * dividirEntero();
+        //EnteroLargo * dividirEntero();
 
         static EnteroLargo suma(EnteroLargo a,EnteroLargo b);
         static EnteroLargo resta(EnteroLargo a, EnteroLargo b);

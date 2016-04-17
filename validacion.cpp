@@ -3,9 +3,8 @@
 #include "Entero820.h"
 using namespace std;
 
-
-
-
+// Método que comprueba que la longitud de un entero largo es correcta, es decir
+// que es potencia de 2 y mayor o igual que 8.
 bool formatoCorrecto(int longitud) {
     while (longitud > 8) {
             if (longitud%2 == 0)
@@ -50,7 +49,7 @@ int main(void) {
     cout << endl;
 
 
-    cout << "Let's multiplicate" << endl;
+    cout << "Multiplicación enteros largos" << endl;
     EnteroLargo::multClasica(a, b).imprimir();
     cout << endl;
     EnteroLargo::multNoRapida(a, b, 1).imprimir();
@@ -58,7 +57,7 @@ int main(void) {
     EnteroLargo::multKarat(a, b, 1).imprimir();
     cout << endl << endl;
 
-    cout << "Multiplicando enteros820" << endl;
+    cout << "Multiplicación enteros820" << endl;
     Entero820::mult820Clasica(a820, b820).imprimir();
     cout << endl;
     Entero820::mult820NoRapida(a820, b820, 1).imprimir();

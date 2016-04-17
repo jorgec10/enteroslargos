@@ -5,6 +5,7 @@
 #include "EnteroLargo.h"
 using namespace std;
 
+// Método que genera enteros largos aleatorios de un tamaño determinado.
 EnteroLargo generadorEntero(int tamano){
     list<char> generado;
     for (int i = 0; i < tamano; i++) {
@@ -13,6 +14,9 @@ EnteroLargo generadorEntero(int tamano){
     return EnteroLargo(generado, true);
 }
 
+// Método que realiza las multiplicaciones y mide el tiempo que tarda cada una,
+// imprimiendo por pantalla los resultados en un formato que permite que éstos 
+// puedan ser importados a una hoja de cálculo.
 void experimentos(int size, int casoBase) {
 
 

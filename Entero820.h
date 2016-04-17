@@ -12,12 +12,21 @@
 
 class Entero820 {
     private:
+        // Array de enteros largos que componen el entero820. Se almacenan en 
+        // orden inverso para facilitar su tratamiento.
         EnteroLargo enteros[EL820SIZE];
-        int primer0;
-        int segundo0;
+        // Tamaño de los enteros largos que lo componen.
         int tamEL;
+        
+        // Características de los enteros820.
+        // Primera posición donde hay un entero largo = 0.
+        int primer0;
+        // Segunda posición donde hay un entero largo = 0.
+        int segundo0;
 
     public:
+    
+        // Todos los métodos y constructores se encuentran documentados en Entero820.cpp
         Entero820();
         Entero820(int posA, int posB, string entero);
         Entero820(int posA, int posB, EnteroLargo arrayEnteros[]);

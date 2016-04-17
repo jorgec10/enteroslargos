@@ -6,6 +6,7 @@
 #include "Entero820.h"
 using namespace std;
 
+// Método que genera enteros largos aleatorios de un tamaño determinado.
 EnteroLargo generadorEntero(int tamano){
     list<char> generado;
     for (int i = 0; i < tamano; i++) {
@@ -14,6 +15,10 @@ EnteroLargo generadorEntero(int tamano){
     return EnteroLargo(generado, true);
 }
 
+// Método que genera enteros820 aleatorios con ceros en las posiciones de los
+// enteros largos que se indican. También es necesario indicar el tamaño de los
+// enteros largos que los componen. Por lo que la longitud del entero820 generado
+// será 8*tamEL.
 Entero820 generador820(int posA, int posB, int tamEL){
     EnteroLargo enteros[EL820SIZE];
 
@@ -32,7 +37,9 @@ Entero820 generador820(int posA, int posB, int tamEL){
     return Entero820(posA, posB, enteros);
 }
 
-
+// Método que realiza las multiplicaciones y mide el tiempo que tarda cada una,
+// imprimiendo por pantalla los resultados en un formato que permite que éstos 
+// puedan ser importados a una hoja de cálculo.
 void experimentos(int size, int casoBase) {
 
 
