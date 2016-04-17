@@ -24,9 +24,9 @@ class Entero820 {
 
         void imprimir();
 
-        EnteroLargo mult820Clasica(Entero820 b);
-        EnteroLargo mult820NoRapida(Entero820 b, int casoBase);
-        EnteroLargo mult820Karat(Entero820 b, int casoBase);
+        static EnteroLargo mult820Clasica(Entero820 a, Entero820 b);
+        static EnteroLargo mult820NoRapida(Entero820 a, Entero820 b, int casoBase);
+        static EnteroLargo mult820Karat(Entero820 a, Entero820 b, int casoBase);
 };
 
 #endif

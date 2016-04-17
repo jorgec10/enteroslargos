@@ -51,19 +51,19 @@ int main(void) {
 
 
     cout << "Let's multiplicate" << endl;
-    a.multClasica(b).imprimir();
+    EnteroLargo::multClasica(a, b).imprimir();
     cout << endl;
-    a.multNoRapida(b, 1).imprimir();
+    EnteroLargo::multNoRapida(a, b, 1).imprimir();
     cout << endl;
-    a.multKarat(b, 1).imprimir();
+    EnteroLargo::multKarat(a, b, 1).imprimir();
     cout << endl << endl;
 
     cout << "Multiplicando enteros820" << endl;
-    a820.mult820Clasica(b820).imprimir();
+    Entero820::mult820Clasica(a820, b820).imprimir();
     cout << endl;
-    a820.mult820NoRapida(b820, 1).imprimir();
+    Entero820::mult820NoRapida(a820, b820, 1).imprimir();
     cout << endl;
-    a820.mult820Karat(b820, 1).imprimir();
+    Entero820::mult820Karat(a820, b820, 1).imprimir();
     cout << endl;
 
 

@@ -50,11 +50,11 @@ void EnteroLargo::imprimir() {
     }
 }
 
-int EnteroLargo::compara(EnteroLargo b){
+int EnteroLargo::compara(EnteroLargo a, EnteroLargo b){
 
-    while(digitos.back() == '0' && digitos.size()>1) {
-        digitos.pop_back();
-        longitud--;
+    while(a.digitos.back() == '0' && a.digitos.size()>1) {
+        a.digitos.pop_back();
+        a.longitud--;
     }
 
     while(b.digitos.back() == '0' && b.digitos.size()>1) {
@@ -62,19 +62,13 @@ int EnteroLargo::compara(EnteroLargo b){
         b.longitud--;
     }
 
-   /*cout << endl;
-    imprimir();
-    cout<<endl;
-    b.imprimir();
-    cout << endl;*/
-
-    if (longitud > b.longitud) return 1;
-    else if (longitud < b.longitud) return -1;
+    if (a.longitud > b.longitud) return 1;
+    else if (a.longitud < b.longitud) return -1;
     else{
-        list<char>::iterator ita = --digitos.end();
+        list<char>::iterator ita = --a.digitos.end();
         list<char>::iterator itb = --b.digitos.end();
 
-        while (ita != --digitos.begin()){
+        while (ita != --a.digitos.begin()){
             if (*ita > * itb) return 1;
             else if (*ita < * itb) return -1;
             else{
@@ -87,19 +81,17 @@ int EnteroLargo::compara(EnteroLargo b){
 }
 
 
-EnteroLargo EnteroLargo::suma(EnteroLargo b) {
-
-    //if (signo == false && b.signo == true) return b.suma(EnteroLargo(digitos, signo));
+EnteroLargo EnteroLargo::suma(EnteroLargo a, EnteroLargo b) {
 
     int llevada=0;
     list<char> resultado;
 
-    if (signo == b.signo){ // Mismo signo, se suman y se pone el signo.
-        list<char>::iterator ita = digitos.begin();
+    if (a.signo == b.signo){ // Mismo signo, se suman y se pone el signo.
+        list<char>::iterator ita = a.digitos.begin();
         list<char>::iterator itb = b.digitos.begin();
 
 
-        while(ita != digitos.end() && itb != b.digitos.end()) {
+        while(ita != a.digitos.end() && itb != b.digitos.end()) {
             int suma = (*ita - '0') + (*itb - '0') + llevada;
             resultado.push_back((suma % 10) + '0');
             llevada = suma/10;
@@ -108,7 +100,7 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
             itb++;
         }
 
-        if (ita == digitos.end()) {
+        if (ita == a.digitos.end()) {
             while(itb != b.digitos.end()){
                 int suma=(*itb - '0') + llevada;
                 resultado.push_back((suma % 10) + '0');
@@ -116,7 +108,7 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
                 itb++;
             }
         } else {
-            while(ita != digitos.end()){
+            while(ita != a.digitos.end()){
                 int suma=(*ita - '0') + llevada;
                 resultado.push_back((suma % 10) + '0');
                 llevada = suma/10;
@@ -128,7 +120,7 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
             resultado.push_back(llevada + '0');
         }
 
-        return EnteroLargo(resultado, signo);
+        return EnteroLargo(resultado, a.signo);
 
     } else { // Distinto signo
 
@@ -138,26 +130,26 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
         list<char>::iterator finMenor;
         bool signoMayor;
 
-        switch (this->compara(b)) {
+        switch (compara(a,b)) {
             case 0: {
-                        for (int i = 0; i < longitud; i++) {
+                        for (int i = 0; i < a.longitud; i++) {
                             resultado.push_back('0');
                         }
                         return EnteroLargo(resultado, true);
             }
             case 1: {
-                        itMayor = digitos.begin();
-                        finMayor = digitos.end();
+                        itMayor = a.digitos.begin();
+                        finMayor = a.digitos.end();
                         itMenor = b.digitos.begin();
                         finMenor = b.digitos.end();
-                        signoMayor = signo;
+                        signoMayor = a.signo;
                         break;
             }
             case -1: {
                         itMayor = b.digitos.begin();
                         finMayor = b.digitos.end();
-                        itMenor = digitos.begin();
-                        finMenor = digitos.end();
+                        itMenor = a.digitos.begin();
+                        finMenor = a.digitos.end();
                         signoMayor = b.signo;
                         break;
             }
@@ -193,18 +185,13 @@ EnteroLargo EnteroLargo::suma(EnteroLargo b) {
                 itMayor++;
             }
         }
-    /*
-        if (llevada != 0) {
-            resultado.push_back(llevada + '0');
-        }*/
-
 
         return EnteroLargo(resultado, signoMayor);
     }
 }
 
-EnteroLargo EnteroLargo::resta(EnteroLargo b) {
-    return this->suma(EnteroLargo(b.digitos, !b.signo));
+EnteroLargo EnteroLargo::resta(EnteroLargo a, EnteroLargo b) {
+    return suma(a, EnteroLargo(b.digitos, !b.signo));
 }
 
 
@@ -270,13 +257,13 @@ EnteroLargo * EnteroLargo::dividirEntero(){
 
 }
 
-EnteroLargo EnteroLargo::multSencilla(int a) {
+EnteroLargo EnteroLargo::multSencilla(EnteroLargo a, int b) {
     int llevada = 0;
     list<char> resultado;
 
-    list<char>::iterator it = digitos.begin();
-    while (it != digitos.end()){
-        int mult = ((*it - '0') * a) + llevada;
+    list<char>::iterator it = a.digitos.begin();
+    while (it != a.digitos.end()){
+        int mult = ((*it - '0') * b) + llevada;
         resultado.push_back((mult % 10) + '0');
         llevada = mult/10;
         it++;
@@ -286,132 +273,83 @@ EnteroLargo EnteroLargo::multSencilla(int a) {
         resultado.push_back(llevada + '0');
     }
 
-    return EnteroLargo(resultado, signo);
+    return EnteroLargo(resultado, a.signo);
 }
 
-EnteroLargo EnteroLargo::multClasica(EnteroLargo b){
+EnteroLargo EnteroLargo::multClasica(EnteroLargo a, EnteroLargo b){
     EnteroLargo resultado;
-    //EnteroLargo prodInt[longitud];
     int i = 0;
 
+    list<char>::iterator it = a.digitos.begin();
 
-    list<char>::iterator it = digitos.begin();
-
-    while(it != digitos.end()){
+    while(it != a.digitos.end()){
         EnteroLargo parcial;
-        parcial = b.multSencilla(*it -'0');
+        parcial = multSencilla(b, *it -'0');
         parcial.desplazarEntero(i);
-        resultado = resultado.suma(parcial);
-        //prodInt[i]= b.multSencilla(*it - '0');
-        //prodInt[i].desplazarEntero(i);
+        resultado = suma(resultado, parcial);
         it++;
         i++;
     }
 
-    /*
-    for (int j = 1; j < longitud; j++) {
-        prodInt[j] = prodInt[j-1].suma(prodInt[j]);
-    }
-
-    if(b.signo = signo) prodInt[longitud-1].setSigno(true);
-    else prodInt[longitud-1].setSigno(false);
-    */
-
-    if(b.signo != signo) resultado.setSigno(false);
+    if(b.signo != a.signo) resultado.setSigno(false);
     else resultado.setSigno(true);
 
-    //return prodInt[longitud-1];
     return resultado;
 }
 
-EnteroLargo EnteroLargo::multNoRapida(EnteroLargo b, int casoBase){
-    int s = longitud/2;
-    if(longitud==casoBase || b.longitud==casoBase){
-        return multClasica(b);
+EnteroLargo EnteroLargo::multNoRapida(EnteroLargo a, EnteroLargo b, int casoBase){
+    int s = a.longitud/2;
+    if(a.longitud==casoBase || b.longitud==casoBase){
+        return multClasica(a, b);
     } else {
 
-        EnteroLargo w = dividirEntero(true);
-        EnteroLargo x = dividirEntero(false);
+        EnteroLargo w = a.dividirEntero(true);
+        EnteroLargo x = a.dividirEntero(false);
         EnteroLargo y = b.dividirEntero(true);
         EnteroLargo z = b.dividirEntero(false);
 
-        /*EnteroLargo * ptrA = this->dividirEntero();
-        EnteroLargo * ptrB = b.dividirEntero();
-
-        EnteroLargo w = *ptrA;
-        EnteroLargo x = *(ptrA + 1);
-        EnteroLargo y = *ptrB;
-        EnteroLargo z = *(ptrB + 1);*/
-
-        EnteroLargo m1 = w.multNoRapida(y, casoBase);
+        EnteroLargo m1 = multNoRapida(w, y, casoBase);
+        EnteroLargo m2 = suma(multNoRapida(w, z, casoBase), multNoRapida(x, y, casoBase));
+        EnteroLargo m3 = multNoRapida(x, z, casoBase);
+        
         m1.desplazarEntero(2*s);
-        EnteroLargo m2 = w.multNoRapida(z, casoBase).suma(x.multNoRapida(y, casoBase));
         m2.desplazarEntero(s);
-        EnteroLargo m3 = x.multNoRapida(z, casoBase);
 
-        EnteroLargo s1 = m1.suma(m2);
-        EnteroLargo solucion = s1.suma(m3);
+        EnteroLargo s1 = suma(m1, m2);
+        EnteroLargo solucion = suma(s1, m3);
 
-        if(b.signo != signo) return EnteroLargo(solucion.digitos, false);
+        if(b.signo != a.signo) return EnteroLargo(solucion.digitos, false);
         else return EnteroLargo(solucion.digitos, true);
 
     }
 }
 
-EnteroLargo EnteroLargo::multKarat(EnteroLargo b, int casoBase){
+EnteroLargo EnteroLargo::multKarat(EnteroLargo a, EnteroLargo b, int casoBase){
 
-    int s = longitud/2;
-    if(longitud==casoBase || b.longitud==casoBase){
-        return multClasica(b);
+    int s = a.longitud/2;
+    if(a.longitud==casoBase || b.longitud==casoBase){
+        return multClasica(a, b);
     } else {
 
-        EnteroLargo w = dividirEntero(true);
-        EnteroLargo x = dividirEntero(false);
+        EnteroLargo w = a.dividirEntero(true);
+        EnteroLargo x = a.dividirEntero(false);
         EnteroLargo y = b.dividirEntero(true);
         EnteroLargo z = b.dividirEntero(false);
 
-        /*EnteroLargo * ptrA = this->dividirEntero();
-        EnteroLargo * ptrB = b.dividirEntero();
+        EnteroLargo m1 = multKarat(w, y, casoBase);
+        EnteroLargo m3 = multKarat(x, z, casoBase);
+        EnteroLargo m2 = multKarat(resta(w, x), resta(z, y), casoBase);
 
-        EnteroLargo w = *ptrA;
-        EnteroLargo x = *(ptrA + 1);
-        EnteroLargo y = *ptrB;
-        EnteroLargo z = *(ptrB + 1);*/
-
-        EnteroLargo m1 = w.multKarat(y, casoBase);
-
-        EnteroLargo m3 = x.multKarat(z, casoBase);
-
-        EnteroLargo m2 = w.resta(x).multKarat(z.resta(y), casoBase);
-
-        //cout << "m2a: ";
-        //m2.imprimir();
-        //cout << endl;
-
-        m2 = m2.suma(m1);
-
-        //cout << "m2b: ";
-        //m2.imprimir();
-        //cout << endl;
-
-        m2 = m2.suma(m3);
-        //m2 = m2.suma(m1).suma(m3);
-
-        //cout << "m2c: ";
-        //m2.imprimir();
-        //cout << endl;
-
+        m2 = suma(m2, m1);
+        m2 = suma(m2, m3);
+        
         m1.desplazarEntero(2*s);
         m2.desplazarEntero(s);
 
-        EnteroLargo s1 = m1.suma(m2);
-        EnteroLargo solucion = s1.suma(m3);
+        EnteroLargo s1 = suma(m1, m2);
+        EnteroLargo solucion = suma(s1, m3);
 
-        //cout << "solucion: ";
-        //solucion.imprimir();
-        //cout << endl << endl;
-
-        if(signo != b.signo) return EnteroLargo(solucion.digitos, false);
+        if(a.signo != b.signo) return EnteroLargo(solucion.digitos, false);
         else return EnteroLargo(solucion.digitos, true);
     }
 }

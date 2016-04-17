@@ -48,37 +48,37 @@ void experimentos(int size, int casoBase) {
     cout << size << ", " << casoBase << ", ";
 
     gettimeofday(&inicio, NULL);
-    a.multClasica(b);
+    EnteroLargo::multClasica(a, b);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
     cout << tiempo << ", ";
 
     gettimeofday(&inicio, NULL);
-    a.multNoRapida(b, casoBase);
+    EnteroLargo::multNoRapida(a, b, casoBase);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
     cout << tiempo << ", ";
 
     gettimeofday(&inicio, NULL);
-    a.multKarat(b, casoBase);
+    EnteroLargo::multKarat(a, b, casoBase);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
     cout << tiempo << ", ";
 
     gettimeofday(&inicio, NULL);
-    a820.mult820Clasica(b820);
+    Entero820::mult820Clasica(a820, b820);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
     cout << tiempo << ", ";
 
     gettimeofday(&inicio, NULL);
-    a820.mult820NoRapida(b820, casoBase);
+    Entero820::mult820NoRapida(a820, b820, casoBase);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
     cout << tiempo << ", ";
 
     gettimeofday(&inicio, NULL);
-    a820.mult820Karat(b820, casoBase);
+    Entero820::mult820Karat(a820, b820, casoBase);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
     cout << tiempo << endl;

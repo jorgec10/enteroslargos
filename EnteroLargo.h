@@ -11,7 +11,7 @@ class EnteroLargo {
         int longitud;
         bool signo;  // True -> positivo, False -> negativo
 
-        EnteroLargo multSencilla(int a);
+        static EnteroLargo multSencilla(EnteroLargo a, int b);
         void setSigno(bool sign);
 
     public:
@@ -27,14 +27,14 @@ class EnteroLargo {
         EnteroLargo dividirEntero(bool mitad);
         EnteroLargo * dividirEntero();
 
-        EnteroLargo suma(EnteroLargo b);
-        EnteroLargo resta(EnteroLargo b);
+        static EnteroLargo suma(EnteroLargo a,EnteroLargo b);
+        static EnteroLargo resta(EnteroLargo a, EnteroLargo b);
 
-        int compara(EnteroLargo b);
+        static int compara(EnteroLargo a, EnteroLargo b);
 
-        EnteroLargo multClasica(EnteroLargo b);
-        EnteroLargo multNoRapida(EnteroLargo b, int casoBase);
-        EnteroLargo multKarat(EnteroLargo b, int casoBase);
+        static EnteroLargo multClasica(EnteroLargo a, EnteroLargo b);
+        static EnteroLargo multNoRapida(EnteroLargo a, EnteroLargo b, int casoBase);
+        static EnteroLargo multKarat(EnteroLargo a, EnteroLargo b, int casoBase);
 
 
 };
