@@ -46,7 +46,7 @@ void EnteroLargo::setSigno(bool sign) {
 // Método que se usa para imprimir por pantalla un entero largo.
 void EnteroLargo::imprimir() {
     // Imprime el signo menos cuando es necesario.
-    if (!signo) { 
+    if (!signo) {
         cout << "-";
     }
     // Recorrido de los digitos en orden inverso para imprimir los digitos
@@ -96,9 +96,9 @@ EnteroLargo EnteroLargo::suma(EnteroLargo a, EnteroLargo b) {
 
     int llevada=0; // Usamos este entero para llevar la cuenta del acarreo.
     list<char> resultado;
-    
+
     // Si tienen el mismo signo, se suman los enteros y se pone el signo.
-    if (a.signo == b.signo){ 
+    if (a.signo == b.signo){
         list<char>::iterator ita = a.digitos.begin();
         list<char>::iterator itb = b.digitos.begin();
 
@@ -113,7 +113,7 @@ EnteroLargo EnteroLargo::suma(EnteroLargo a, EnteroLargo b) {
             itb++;
         }
         // Esta comprobación permite tratar enteros largos con distinta longitud.
-        // Ya que cuando termina el recorrido de los dígitos de uno de ellos, 
+        // Ya que cuando termina el recorrido de los dígitos de uno de ellos,
         // añade los dígitos del otro.
         if (ita == a.digitos.end()) {
             while(itb != b.digitos.end()){
@@ -130,7 +130,7 @@ EnteroLargo EnteroLargo::suma(EnteroLargo a, EnteroLargo b) {
                 ita++;
             }
         }
-    
+
         // Si al terminar de recorrer ambos números nos queda un acarreo, se añade
         // al principio del entero largo resultante.
         if (llevada != 0) {
@@ -138,18 +138,18 @@ EnteroLargo EnteroLargo::suma(EnteroLargo a, EnteroLargo b) {
         }
 
         return EnteroLargo(resultado, a.signo);
-    
+
     // Si son de distinto signo, tenemos que ver cual de ellos es el mayor, hacer la
     // resta del mayor menos el menor y poner el signo del mayor.
-    } else { 
-        
+    } else {
+
         // Iteradores para recorrer posteriormente los números.
         list<char>::iterator itMayor;
         list<char>::iterator itMenor;
         list<char>::iterator finMayor;
         list<char>::iterator finMenor;
         bool signoMayor;
-        
+
         // Realizamos la comparación para ver qué entero es mayor.
         // Con este bloque de código inicializamos los iteradores para
         // realizar una resta genérica.
@@ -180,7 +180,7 @@ EnteroLargo EnteroLargo::suma(EnteroLargo a, EnteroLargo b) {
                         break;
             }
         }
-        
+
         // Recorremos cifra a cifra y vamos haciendo la resta hasta que uno de los
         // números llega a su fin.
         while(itMayor != finMayor && itMenor != finMenor) {
@@ -197,9 +197,9 @@ EnteroLargo EnteroLargo::suma(EnteroLargo a, EnteroLargo b) {
             itMenor++;
             resultado.push_back(resta + '0');
         }
-                
+
         // Esta comprobación permite tratar enteros largos con distinta longitud.
-        // Ya que cuando termina el recorrido de los dígitos de uno de ellos, 
+        // Ya que cuando termina el recorrido de los dígitos de uno de ellos,
         // añade los dígitos del otro.
         if (itMayor == finMayor) {
             while(itMenor != finMenor){
@@ -247,7 +247,7 @@ EnteroLargo EnteroLargo::dividirEntero(bool mitad){
     list<char> resultado;
     int s = longitud/2;    // Será usada después para realizar la comprobación de la mitad.
     int indice = 0;        // Junto a la variable s nos permite realizar el recorrido para obtener la mitad.
-     
+
     // Mete en la lista resultado los dígitos de la primera mitad del entero largo.
     if(!mitad){
         list<char>::iterator it = digitos.begin();
@@ -256,9 +256,9 @@ EnteroLargo EnteroLargo::dividirEntero(bool mitad){
             it++;
             indice++;
         }
-        
+
     // Mete en la lista resultado los dígitos de la segunda mitad del entero largo.
-    } else { 
+    } else {
         list<char>::iterator it = digitos.begin();
         // Avance "feo" para quitarnos la primera mitad
         while(it !=digitos.end() && indice < s){
@@ -309,8 +309,8 @@ EnteroLargo * EnteroLargo::dividirEntero(){
 EnteroLargo EnteroLargo::multSencilla(EnteroLargo a, int b) {
     int llevada = 0; // Usamos este entero para llevar la cuenta del acarreo.
     list<char> resultado;
-    
-    // Recorre el entero largo cifra a cifra y va multiplicando por b, teniendo en 
+
+    // Recorre el entero largo cifra a cifra y va multiplicando por b, teniendo en
     // cuenta el acarreo.
     list<char>::iterator it = a.digitos.begin();
     while (it != a.digitos.end()){
@@ -319,7 +319,7 @@ EnteroLargo EnteroLargo::multSencilla(EnteroLargo a, int b) {
         llevada = mult/10;
         it++;
     }
-    
+
     // Si al terminar de recorrer el número nos queda un acarreo, se añade
     // al principio del entero largo resultante.
     if (llevada != 0) {
@@ -334,14 +334,14 @@ EnteroLargo EnteroLargo::multSencilla(EnteroLargo a, int b) {
 // de la multiplicación sencilla. Representa el método directo de multiplicación
 // requerido en la práctica.
 EnteroLargo EnteroLargo::multClasica(EnteroLargo a, EnteroLargo b){
-    EnteroLargo resultado;  // En esta variable se irán acumulando las sumas 
+    EnteroLargo resultado;  // En esta variable se irán acumulando las sumas
                             // parciales en cada iteración del bucle principal
-    int i = 0;              // Nos permite realizar los desplazamientos 
+    int i = 0;              // Nos permite realizar los desplazamientos
                             // necesarios en el bucle.
 
     list<char>::iterator it = a.digitos.begin();
-    
-    // Recorremos el entero largo a de digito en digito, multiplicando cada digito por 
+
+    // Recorremos el entero largo a de digito en digito, multiplicando cada digito por
     // el entero largo b.
     while(it != a.digitos.end()){
         EnteroLargo parcial; // Aquí guardamos el resultado de la multiplicación.
@@ -353,7 +353,7 @@ EnteroLargo EnteroLargo::multClasica(EnteroLargo a, EnteroLargo b){
         it++;
         i++;
     }
-    
+
     // Si son de distinto signo, el resultado es de signo negativo
     if(b.signo != a.signo) resultado.setSigno(false);
     // si no, el resultado es de signo positivo.
@@ -366,7 +366,7 @@ EnteroLargo EnteroLargo::multClasica(EnteroLargo a, EnteroLargo b){
 // Método que realiza la multiplicación de enteros largos a y b, mediante el método
 // divide y vencerás no rápido. Es un método recursivo.
 EnteroLargo EnteroLargo::multNoRapida(EnteroLargo a, EnteroLargo b, int casoBase){
-    
+
     // Comprobación del caso base, si se cumple llama a la multiplicación clásica.
     // Es decir, un método directo. Equivalente a Pequeño(a, b) en esquema de diapositivas.
     if(a.longitud==casoBase || b.longitud==casoBase){
@@ -375,22 +375,22 @@ EnteroLargo EnteroLargo::multNoRapida(EnteroLargo a, EnteroLargo b, int casoBase
     } else {
         int s = a.longitud/2;       // Obtiene la mitad de longitud para realizar
                                     // futuros desplazamientos.
-        
+
         // En las siguientes líneas se hace el cálculo de la siguiente fórmula.
         // del método divide y vencerás:
-        // solucion = a*b = 10^(2s)*w*y + 10^(s)*(w*z+x*y) + x*z 
-        
+        // solucion = a*b = 10^(2s)*w*y + 10^(s)*(w*z+x*y) + x*z
+
         // Dividimos los enteros largos y los guardamos en las variables w, x, y, z.
         EnteroLargo w = a.dividirEntero(true);
         EnteroLargo x = a.dividirEntero(false);
         EnteroLargo y = b.dividirEntero(true);
         EnteroLargo z = b.dividirEntero(false);
-    
+
         // Obtenemos los resultados parciales del método detallado arriba.
         EnteroLargo m1 = multNoRapida(w, y, casoBase);
         EnteroLargo m2 = suma(multNoRapida(w, z, casoBase), multNoRapida(x, y, casoBase));
         EnteroLargo m3 = multNoRapida(x, z, casoBase);
-        
+
         // Realizamos los desplazamientos en función de s.
         m1.desplazarEntero(2*s);
         m2.desplazarEntero(s);
@@ -398,7 +398,7 @@ EnteroLargo EnteroLargo::multNoRapida(EnteroLargo a, EnteroLargo b, int casoBase
         // Obtenemos el resultado realizando las correspondientes sumas.
         EnteroLargo s1 = suma(m1, m2);
         EnteroLargo solucion = suma(s1, m3);
-        
+
         // Si son de distinto signo, el resultado es de signo negativo
         if(b.signo != a.signo) return EnteroLargo(solucion.digitos, false);
         // si no, el resultado es de signo positivo.
@@ -417,11 +417,11 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo a, EnteroLargo b, int casoBase){
     } else {
         int s = a.longitud/2;       // Obtiene la mitad de longitud para realizar
                                     // futuros desplazamientos.
-                                    
+
         // En las siguientes líneas se hace el cálculo de la siguiente fórmula.
-        // del método divide y vencerás Karatsuba y Ofman:                            
-        // solucion = u*v = 10^(2s)*w*y + 10^(s)*[(w-x)*(z-y) + w*y + x*z] + x*z                             
-                                    
+        // del método divide y vencerás Karatsuba y Ofman:
+        // solucion = u*v = 10^(2s)*w*y + 10^(s)*[(w-x)*(z-y) + w*y + x*z] + x*z
+
         // Dividimos los enteros largos y los guardamos en las variables w, x, y, z.
         EnteroLargo w = a.dividirEntero(true);
         EnteroLargo x = a.dividirEntero(false);
@@ -434,7 +434,7 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo a, EnteroLargo b, int casoBase){
         EnteroLargo m2 = multKarat(resta(w, x), resta(z, y), casoBase);
         m2 = suma(m2, m1);
         m2 = suma(m2, m3);
-        
+
         // Realizamos los desplazamientos en función de s.
         m1.desplazarEntero(2*s);
         m2.desplazarEntero(s);
@@ -442,10 +442,29 @@ EnteroLargo EnteroLargo::multKarat(EnteroLargo a, EnteroLargo b, int casoBase){
         // Obtenemos el resultado realizando las correspondientes sumas.
         EnteroLargo s1 = suma(m1, m2);
         EnteroLargo solucion = suma(s1, m3);
-        
+
         // Si son de distinto signo, el resultado es de signo negativo
         if(a.signo != b.signo) return EnteroLargo(solucion.digitos, false);
         // si no, el resultado es de signo positivo.
         else return EnteroLargo(solucion.digitos, true);
     }
+}
+
+// Método para convertir un entero largo a string. Utilizado para comparar los
+// resultados en las validaciones
+string EnteroLargo::toTexto(){
+  string resultado;
+  resultado.reserve(longitud);
+
+  // Añade el signo menos cuando es necesario.
+  if (!signo) {
+      resultado.push_back('-');
+  }
+  // Recorrido de los digitos en orden inverso para añadir los digitos
+  list<char>::iterator it = --digitos.end();
+  while(it!=--digitos.begin()) {
+      resultado.push_back(*it);
+      it--;
+  }
+  return resultado;
 }

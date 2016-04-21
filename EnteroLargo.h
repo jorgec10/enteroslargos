@@ -14,11 +14,11 @@ class EnteroLargo {
         // lista cada vez que se necesita.
         int longitud;
         // True: positivo. False: negativo.
-        bool signo;  
+        bool signo;
 
 
         // Todos los métodos están documentados en EnteroLargo.cpp
-        
+
         static EnteroLargo multSencilla(EnteroLargo a, int b);
         void setSigno(bool sign);
 
@@ -30,6 +30,8 @@ class EnteroLargo {
         int getLongitud();
 
         void imprimir();
+        string toTexto();
+
         void desplazarEntero(int desp);
 
         EnteroLargo dividirEntero(bool mitad);
