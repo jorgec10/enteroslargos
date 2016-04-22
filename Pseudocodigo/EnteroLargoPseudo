@@ -1,4 +1,4 @@
-multClasica(Entero820 a, Entero820 b) : EnteroLargo r {
+multClasica(EnteroLargo a, EnteroLargo b) : EnteroLargo r {
     EnteroLargo resultado;
     
     para i:= 0 hasta a.longitud hacer
@@ -15,7 +15,7 @@ multClasica(Entero820 a, Entero820 b) : EnteroLargo r {
             
 }
 
-multNoRapida(Entero820 a, Entero820 b) : EnteroLargo r {
+multNoRapida(EnteroLargo a, EnteroLargo b) : EnteroLargo r {
     si (a.longitud == 1 OR b.longitud == 1) entonces devuelve a * b
     si_no
         entero s = a.longitud/2;
@@ -34,7 +34,7 @@ multNoRapida(Entero820 a, Entero820 b) : EnteroLargo r {
     fin_si
 }
 
-multKarat(Entero820 a, Entero820 b) : EnteroLargo r {
+multKarat(EnteroLargo a, EnteroLargo b) : EnteroLargo r {
     si (a.longitud == 1 OR b.longitud == 1) entonces devuelve a * b
     si_no
         entero s = a.longitud/2;
