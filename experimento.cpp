@@ -54,7 +54,7 @@ void experimentos(int size, int casoBase) {
 
     cout << size << ", " << casoBase << ", ";
 
-    gettimeofday(&inicio, NULL);
+    /*gettimeofday(&inicio, NULL);
     EnteroLargo::multClasica(a, b);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
@@ -70,7 +70,7 @@ void experimentos(int size, int casoBase) {
     EnteroLargo::multKarat(a, b, casoBase);
     gettimeofday(&fin, NULL);
     tiempo=(fin.tv_sec - inicio.tv_sec) + (fin.tv_usec - inicio.tv_usec)/1000000.0;
-    cout << tiempo << ", ";
+    cout << tiempo << ", ";*/
 
     gettimeofday(&inicio, NULL);
     Entero820::mult820Clasica(a820, b820);
@@ -101,7 +101,7 @@ int main(int argc, char* argv[]){
     int baseInicial = atoi(argv[3]);
     int baseFinal = atoi(argv[4]);
 
-    cout << "Size, Caso Base, Clasica, noRapida, Karat, 820Clasica, 820noRapida, 820Karat" << endl;
+    cout << "Size, Caso Base, 820Clasica, 820noRapida, 820Karat" << endl;
     for (int i = tamInicial; i <= tamFinal; i=i*2) {
         for (int j = baseInicial; j <= baseFinal; j=j*2) {
             experimentos(i, j);
