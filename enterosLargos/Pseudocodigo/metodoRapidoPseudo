@@ -1,0 +1,40 @@
+r = u·v = 10^(2S)·w·y + 10^(S)·(w·z+x·y) + x·z 
+
+
+multRapida(EnteroLargo a, EnteroLargo b): EnteroLargo r
+    si a.longitud = 1 y b.longitud = 1 entonces
+        return a.digitos*b.digitos;
+    si_no entonces
+        EnteroLargo w = dividir(a, true); //Primera mitad
+        EnteroLargo x = dividir(a, false); //Segunda mitad
+        EnteroLargo y = dividir(b, true); //Primera mitad
+        EnteroLargo z = dividir(b, false); //Segunda mitad
+        
+        
+    return multRapida(w,y).desplazar(2*(a.longitud/2)) + 
+    + (multRapida(w,z)+multRapida(x,y).desplazar(s) + 
+    + multRapida(x,z)
+
+
+
+dividir(EnteroLargo a, booleano mitad): EnteroLargo r
+    EnteroLargo resultado
+    si (mitad) entonces
+        for i:=1 to longitud/2 do
+            resultado.digitos[i] = a.digitos[i];
+    si_no entonces 
+        for i:=longitud/2 to longitud do
+            resultado.digitos[i] = a.digitos[i];
+    fin_si
+    return resultado;
+    
+    12345678
+    00000001
+    ---------
+    
+    1234    1234    5678    5678
+    0000    0001    0000    0001
+            ----            ----
+            
+    12  12
+    00  
