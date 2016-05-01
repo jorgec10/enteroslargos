@@ -4,30 +4,30 @@
 
 using namespace std;
 
+#define MAX_SEG 15
 
-bool comprueba(bitset<12> *param, int n){
+bool comprueba(bitset<MAX_SEG> *param, size_t n){
     std::set<int> valores;
-    for (int i = 0; i < n; i++) {
+    for (size_t i = 0; i < n; i++) {
         valores.insert(param[i].to_ulong());
     }
     return valores.size()==n;
 }
 
-bool solucion(int nivel, int n, bitset<12> *param, int *solucion){
-    if(nivel!=n) return false;
-    std::bitset<12> b[n];
+bool isSolucion(int nivel, int n, bitset<MAX_SEG> *param, int *solucion, int p){
+    
+    if(nivel!=p-1) return false;
+    std::bitset<MAX_SEG> b[n];
     for (int i = 0; i < n; i++) {
-        b[i] = new bitset<12>(param[i].to_string());
+        b[i] = bitset<MAX_SEG>(param[i].to_ulong());
     }
-    for (int j = 0; j < solucion.size(); j++) {
+    for (int j = 0; j < p; j++) {
         if(solucion[j]==0){
             for (int k = 0; k < n; k++) {
-                b[k].set(j,false);
+                b[k].reset(j);
             }
         }
     }
-    
-    
     
     return comprueba(b, n);
 }
@@ -44,7 +44,7 @@ int main(void){
         int p, n;
         cin >> p >> n; // Num segmentos y num digitos
         
-        std::bitset<12> segmentos[n];
+        std::bitset<MAX_SEG> segmentos[n];
         
         for (int j = 0; j < n; j++) {
             for (int k = 0; k < p; k++) {
@@ -60,7 +60,7 @@ int main(void){
         int nsMin = p;           // num segmentos minimo
         int segOn = 0;
         
-        for (int i = 0; i < solucion.size(); i++) {
+        for (int i = 0; i < p; i++) {
             solucion[i] = -1;
         }
         
@@ -71,13 +71,22 @@ int main(void){
             segOn+=solucion[nivel];
             
             // Solucion
-            if ((nivel==n-1) && ())
+            if (isSolucion(nivel,n,segmentos,solucion,p) && segOn<nsMin) {
+                nsMin = segOn;
+            } 
             
+            if (nivel<p-1) {
+                nivel++;
+            } else {
+                while (!solucion[nivel]<1 && nivel>-1) {
+                    segOn--;
+                    solucion[nivel] = -1;
+                    nivel--;
+                }
+            }
             
-            
-            
-        } while (nivel==-1);
+        } while (nivel!=-1);
         
-        
+        cout << nsMin << endl;
     }
 }
