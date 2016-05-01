@@ -1,35 +1,24 @@
 #include <iostream>
 #include <bitset>
 #include <set>
+#include <math.h>
 
 using namespace std;
 
 #define MAX_SEG 15
 
-bool comprueba(bitset<MAX_SEG> *param, size_t n){
-    std::set<int> valores;
-    for (size_t i = 0; i < n; i++) {
-        valores.insert(param[i].to_ulong());
-    }
-    return valores.size()==n;
-}
-
-bool isSolucion(int nivel, int n, bitset<MAX_SEG> *param, int *solucion, int p){
+bool isSolucion(int nivel, size_t n, bitset<MAX_SEG> *param, bitset<MAX_SEG> solucion, int p){
     
     if(nivel!=p-1) return false;
-    std::bitset<MAX_SEG> b[n];
-    for (int i = 0; i < n; i++) {
-        b[i] = bitset<MAX_SEG>(param[i].to_ulong());
-    }
-    for (int j = 0; j < p; j++) {
-        if(solucion[j]==0){
-            for (int k = 0; k < n; k++) {
-                b[k].reset(j);
-            }
-        }
+    
+    std::set<int> valores;
+
+    for (size_t i = 0; i < n; i++) {
+        valores.insert((param[i] & solucion).to_ulong());
     }
     
-    return comprueba(b, n);
+    return valores.size()==n;
+    
 }
 
 
@@ -40,7 +29,6 @@ int main(void){
     for (int i = 0; i < numcasos; i++) {
         
         // Lectura de datos
-        
         int p, n;
         cin >> p >> n; // Num segmentos y num digitos
         
@@ -55,19 +43,19 @@ int main(void){
         }
         
         // Backtracking
-        int solucion[p];
+        bitset<MAX_SEG> solucion;
         int nivel = 0;
         int nsMin = p;           // num segmentos minimo
         int segOn = 0;
+        int estado = -1;
         
-        for (int i = 0; i < p; i++) {
-            solucion[i] = -1;
-        }
+        int nivelesMin = log2(p);
         
         // Algoritmo
         do{
             // Generar
-            solucion[nivel]++;
+            estado++;
+            
             segOn+=solucion[nivel];
             
             // Solucion
@@ -75,14 +63,16 @@ int main(void){
                 nsMin = segOn;
             } 
             
-            if (nivel<p-1) {
+            if(nivel<p-1 && (segOn+p-1-nivel) >= nivelesMin){
                 nivel++;
+                estado = -1;
             } else {
                 while (!solucion[nivel]<1 && nivel>-1) {
                     segOn--;
-                    solucion[nivel] = -1;
+                    solucion[nivel] = 0;
                     nivel--;
                 }
+                solucion[nivel]=1;
             }
             
         } while (nivel!=-1);

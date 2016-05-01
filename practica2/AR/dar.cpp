@@ -49,9 +49,7 @@ int main (void) {
             cin >> datos[j].beneficio;
         }
         
-        
         sort(datos, datos+aviones, comparaTupla);
-        
         
         for (int k = 0; k<aviones; k++){
                 int argo = solucion[datos[k].tiempo-1];
@@ -64,7 +62,6 @@ int main (void) {
                 else {
                     for (int j = datos[k].tiempo-2; j >= 0; j--) {
                         argo = solucion[j];
-                        //cout << "argo:" << argo << endl;
                         if (argo == -1) {
                             solucion[j] = k;
                             mejor+=datos[k].beneficio;
@@ -73,14 +70,7 @@ int main (void) {
                         }
                     }
                 }
-                //cout << "Solucion: ";
-                //for (int h = 0; h < ut; h++) {
-                //    cout << solucion[h] << " ";
-                //}
-                //cout << "mejor: " << mejor<< endl;
         }
-        
-        
         cout << mejor << endl;
     }
     

@@ -1,0 +1,37 @@
+tipo tupla = registro
+    beneficio: entero;
+    tiempo: entero;
+finregistro
+
+// Lectura de datos y escritura en un array de tuplas
+// Cuando se lee un tiempo mayor que el disponible, se reduce
+// a este último valor.
+// Ordenación del array por beneficio, de mayor a menor.
+
+datos : array de tupla;
+solucion : array de entero;
+cogidos, mejor : entero;
+
+// valores en solucion inicializados a -1
+// cogidos y mejor incializados a 0
+
+para k:=0 hasta numAviones hacer
+    control: entero;
+    control:= solucion[datos[k].tiempo-1];
+    
+    si (control=-1) entonces
+        solucion[datos[k].tiempo-1] = k;
+        mejor+=datos[k].beneficio;
+        cogidos++;
+    si_no entonces
+        para j:= datos[k].tiempo-2 hasta 0 hacer
+            control:=solucion[j];
+            si (control=-1) entonces
+                solucion[k]=k;
+                mejor+=datos[k].beneficio;
+                cogidos++;
+                // Break
+            fin_si
+        fin_para
+fin_para
+imprimir(mejor);
