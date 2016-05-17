@@ -51,25 +51,41 @@ int main (void) {
         
         sort(datos, datos+aviones, comparaTupla);
         
-        for (int k = 0; k<aviones; k++){
-                int argo = solucion[datos[k].tiempo-1];
+        int k=0;
+        while (k<aviones && cogidos < ut){
+                int control = solucion[datos[k].tiempo-1];
                 
-                if (argo == -1) {
+                if (control == -1) {
                     solucion[datos[k].tiempo-1] = k;
                     mejor+=datos[k].beneficio;
                     cogidos++;
                 }
                 else {
-                    for (int j = datos[k].tiempo-2; j >= 0; j--) {
-                        argo = solucion[j];
-                        if (argo == -1) {
+                    // Creo que esto puede simplificarlo.
+                    // Por lo menos no aparece el break
+                    int j = datos[k].tiempo-2;
+                    control = solucion[j];
+                    while (j>=0 && control!=-1) {
+                        j--;
+                        control = solucion[j];
+                    }
+                    if (control==-1) {
+                        solucion[j] = k;
+                        mejor+=datos[k].beneficio;
+                        cogidos++;
+                    }
+                
+                    /*for (int j = datos[k].tiempo-2; j >= 0; j--) {
+                        control = solucion[j];
+                        if (control == -1) {
                             solucion[j] = k;
                             mejor+=datos[k].beneficio;
                             cogidos++;
                             break;
                         }
-                    }
+                    }*/
                 }
+                k++;
         }
         cout << mejor << endl;
     }

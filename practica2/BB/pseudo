@@ -1,0 +1,46 @@
+segmentos: array de arrays de bits;
+solucion: array de bits;
+
+// Lectura de datos
+
+esSolucion: Hacer un y-logico entre el array solucion y cada uno de los array de segmentos
+Devolver si todos los arrays del array segmentos son distinguibles, es decir, comprobar que
+no hay dos arrays iguales.
+
+nivel, nsMin, segOn, estado, nivelesMin: entero;
+
+// nivel y segOn inicializados a 0
+// nsMin inicializado a numSegmentos
+// estado inicializado a -1
+// nivelesMin inicializado a log2(numSegmentos)
+
+repetir{
+    // Generar
+    estado = estado+1;
+    segOn = segOn + solucion[nivel];
+    
+    // Solucion
+    si (esSolucion() y segOn<nsMin) entonces
+        nsMin = segOn
+    fin_si
+    
+    // Criterio
+    si (nivel<p-1 y nivelesRestantes >= nivelesMin) entonces
+        nivel = nivel +1;
+        estado = -1;
+    si_no entonces
+    
+        // Si no hay mas hermanos
+        mientras (no solucion[nivel]<1 y nivel>-1) hacer
+        
+            // Retroceder
+            segOn = segOn -1;
+            solucion[nivel] = 0;
+            nivel = nivel -1;
+        fin_mientras
+        
+        // Si hay mas hermanos, actualiza solucion
+        solucion[nivel] = 1;
+    fin_si
+} hasta (nivel == -1)
+imprimir nsMin;

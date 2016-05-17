@@ -10,15 +10,11 @@ using namespace std;
 bool isSolucion(int nivel, size_t n, bitset<MAX_SEG> *param, bitset<MAX_SEG> solucion, int p){
     
     if(nivel!=p-1) return false;
-    
     std::set<int> valores;
-
     for (size_t i = 0; i < n; i++) {
         valores.insert((param[i] & solucion).to_ulong());
     }
-    
     return valores.size()==n;
-    
 }
 
 
@@ -48,14 +44,12 @@ int main(void){
         int nsMin = p;           // num segmentos minimo
         int segOn = 0;
         int estado = -1;
-        
-        int nivelesMin = log2(p);
+        int minTeorico = log2(p);
         
         // Algoritmo
         do{
             // Generar
             estado++;
-            
             segOn+=solucion[nivel];
             
             // Solucion
@@ -63,7 +57,8 @@ int main(void){
                 nsMin = segOn;
             } 
             
-            if(nivel<p-1 && (segOn+p-1-nivel) >= nivelesMin){
+            // Criterio
+            if(nivel<p-1 && (segOn+p-1-nivel) >= minTeorico){
                 nivel++;
                 estado = -1;
             } else {
